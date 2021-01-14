@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - gem_cache:/gems
+    command: bundle exec jekyll serve --force_polling --watch
+
+  weback:
+    build: .
+    volumes:
+      - .:/app
+    command: npx webpack --config webpack.config.js -w
+
+volumes:
+  gem_cache:
